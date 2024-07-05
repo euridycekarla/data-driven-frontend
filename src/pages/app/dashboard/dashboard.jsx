@@ -1,9 +1,9 @@
-import { Helmet } from 'react-helmet-async'
 import { NumeroLicitacoesCard } from './numero-licitacoes-card'
 import { ValorTotalCard } from './valor-total-card'
 import ModalidadeCompraCard from './modalidade-compra-card'
 import SituacaoLicitacaoCard from './situacao-licitacoes-card'
 import OrgaoCard from './orgao-card'
+import AnoLicitacaoChart from './ano-licitacao-chart'
 
 
 
@@ -22,6 +22,9 @@ export function Dashboard(){
             <ModalidadeCompraCard />
             <SituacaoLicitacaoCard/>
             <OrgaoCard/>
+        </div>
+        <div className="grid grid cols-9 gap-2">
+            <AnoLicitacaoChart/>
 
         </div>
     </div>

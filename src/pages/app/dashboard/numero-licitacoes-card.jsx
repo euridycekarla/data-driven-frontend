@@ -28,9 +28,7 @@ export function NumeroLicitacoesCard() {
                     </span>
                     <p className="text-xs text-muted-foreground">
                         Dados cadastrados e atualizados
-                        <span className="text-blue-800 dark:text-emerald-400">
-                            mensalmente
-                        </span>
+                        <span className="text-blue-800 dark:text-emerald-400"> mensalmente</span>
                     </p>
                 </CardContent>
             )}
