@@ -23,11 +23,11 @@ export  default function AnoLicitacaoChart(){
                 <LineChart data={data} style={{ fontSize: 12 }}>
                     <XAxis dataKey="date" tickLine={false} axisLine={false} dy={16}/>
                     <YAxis stroke=" #888" axisLine={false} tickLine={false} />
-
+                    <Tooltip/>
+                    <Legend/>
                     <Line type="linear" strokeWidth={2} dataKey="licitacoes" />
                 </LineChart>
-                <Tooltip/>
-                <Legend/>
+
             </ResponsiveContainer>
             </CardContent>
         </Card>

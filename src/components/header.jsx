@@ -30,7 +30,7 @@ export function Header(){
                 Itens licitados
                 </NavLink>
 
-                <NavLink to="/participantes">
+                <NavLink to="/empresas-participantes">
                 <Building2 className="h-4 w-4" />
                  Empresas Participantes das Licitações
                 </NavLink>

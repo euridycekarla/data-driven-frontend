@@ -1,13 +1,10 @@
 import * as React from "react";
-import { NumeroLicitacoesCard } from './numero-licitacoes-card'
-import { ValorTotalCard } from './valor-total-card'
-import ModalidadeCompraCard from './modalidade-compra-card'
-import SituacaoLicitacaoCard from './situacao-licitacoes-card'
-import OrgaoCard from './orgao-card'
-import AnoLicitacaoChart from './ano-licitacao-chart'
 import { Helmet } from "react-helmet-async";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import TipoEmpresaCard from "./tipo-empresa";
+import TotalEmpresaCard from "./total-empresas";
+import { TopEmpresasCard } from '/src/pages/app/empresas/top-empresas.jsx';
 
 const itens = [
   { item: "3842748", descricao: "OBRAS DE CONSTRUÇÃO DE UM CAMPO DE FUTEBOL NO MUNICÍPIO DE JUNCO DO SERIDÓ, CONFORME PLANILHA DE CUSTOS, CRONOGRAMA FÍSICO–FINANCEIRO, BDI, MEMORIAL DESCRITIVO E PLANTAS.", quantidade: 1, tipo: "Serviço", dataResultado: "2024-02-07", estado: "Paraíba" },
@@ -23,7 +20,7 @@ const itens = [
 
 ];
 
-export function Dashboard(){
+export function Empresas(){
     const [selectedEstado, setSelectedEstado] = React.useState("");
     const [selectedAno, setSelectedAno] = React.useState("");
     const [filteredItens, setFilteredItens] = React.useState(itens);
@@ -37,11 +34,10 @@ export function Dashboard(){
     };
     return (
 <>
-<Helmet title="Dashboard"/>
-
+<Helmet title="Fornecedores"/>
 
 <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold tracking-tight">Painel de visão geral das licitações</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Empresas participantes de licitaçes(fornecedores)</h1>
         <form className="flex items-center gap-2">
         <span className="text-sm font-semibold">Filtros:</span>
         <Select onValueChange={(value) => setSelectedEstado(value)}>
@@ -72,18 +68,14 @@ export function Dashboard(){
         </Select>
         <Button onClick={handleFilter}>Filtrar</Button>
       </form>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-6">
             <div className="flex flex-col gap-8">
-                <NumeroLicitacoesCard />
-                <ValorTotalCard />
+            <TotalEmpresaCard/>
             </div>
-            <ModalidadeCompraCard />
-            <SituacaoLicitacaoCard/>
-            <OrgaoCard/>
+            <TipoEmpresaCard/>
         </div>
         <div className="grid grid cols-9 gap-2">
-            <AnoLicitacaoChart/>
-
+        <TopEmpresasCard/>
         </div>
     </div>
 

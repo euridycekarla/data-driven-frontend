@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, LineChart } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { Card,CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 const data = [
-  { name: 'Dispensa', value: 800 },
-  { name: 'Pregão', value: 300 },
-  { name: 'Concorrência', value: 300 },
-  { name: 'Leilão', value: 200 },
+  { name: 'EPP', value: 800 },
+  { name: 'ME', value: 300 },
+  { name: 'Outros', value: 300 },
 ];
 
 const COLORS = ['#6d8a39', '#d86b60', '#dbd799', '#3D8BF2'];
@@ -24,14 +23,14 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-export default class ModalidadeCompraCard extends PureComponent {
+export default class TipoEmpresaCard extends PureComponent {
   render() {
     return (
       <>
         <Card>
           <CardHeader className=" flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-base font-semibold">
-                Modalidades de compras
+                Tipos de empresas
               </CardTitle>
           </CardHeader>
           <CardContent className="space-y-1">
