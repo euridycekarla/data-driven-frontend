@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { Card,CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-
-const data = [
-  { name: 'EPP', value: 800 },
-  { name: 'ME', value: 300 },
-  { name: 'Outros', value: 300 },
-];
+import { api } from "@/lib/axios";
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const COLORS = ['#6d8a39', '#d86b60', '#dbd799', '#3D8BF2'];
 
@@ -22,9 +19,26 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
     </text>
   );
 };
+export  default function TipoEmpresaCard (){
+  const [loading, setLoading] = useState(true);
+  const [tipoEmpresa, setTipoEmpresa] = useState([]);
+  const tipo = tipoEmpresa.map((tipo) => ({ name: tipo._id, value: tipo.count }));
 
-export default class TipoEmpresaCard extends PureComponent {
-  render() {
+  const getTipoEmpresa = async () => {
+    try {
+      const response = await api.get("/tipo-fornecedores");
+      setTipoEmpresa(response.data);
+    } catch (error) {
+      console.error("Erro ao obter itens licitacoes", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getTipoEmpresa();
+  }, []);
+
     return (
       <>
         <Card>
@@ -38,17 +52,17 @@ export default class TipoEmpresaCard extends PureComponent {
         <PieChart width={400} height={400}>
 
           <Pie
-            data={data}
+            data={tipo}
             cx="50%"
             cy="50%"
             labelLine={false}
             label={renderCustomizedLabel}
-            outerRadius={80}
+            outerRadius={90}
             fill="#8884d8"
             dataKey="value"
           >
 
-            {data.map((entry, index) => (
+            {tipo.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
@@ -61,4 +75,4 @@ export default class TipoEmpresaCard extends PureComponent {
       </>
     );
   }
-}
+

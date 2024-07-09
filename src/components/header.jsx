@@ -13,7 +13,7 @@ export function Header(){
             <div className="flex h-16 items-center gap-6 px-6">
             <div className="flex gap-2 items-center justify-center">
             <BarChart2 className="h-6 w-6"/>
-            <h1 className="text-xl">licitando</h1>
+            <h1 className="text-xl">licitTracker</h1>
 
             </div>
 

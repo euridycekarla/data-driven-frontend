@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { CheckCheck } from 'lucide-react';
+import { api } from "@/lib/axios";
+import { Loader2 } from "lucide-react";
 
-
-export function NumeroLicitacoesCard() {
+export default function NumeroLicitacoesCard() {
+    const [loading, setLoading] = useState(true);
+    const [numeroLicitacoes, setNumeroLicitacoes] = useState(null);
     const [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-
-        setTimeout(() => {
+    const getNumeroLicitacoes = async () => {
+        try {
+            const response = await api.get("/total-licitacoes");
+            setNumeroLicitacoes(response.data.totalLicitacoes);
+        } catch (error) {
+            console.error("Erro ao obter número total de licitações", error);
+        } finally {
+            setLoading(false);
             setLoaded(true);
-        }, 1000);
+        }
+    };
+
+    useEffect(() => {
+        getNumeroLicitacoes();
     }, []);
 
     return (
@@ -21,17 +33,24 @@ export function NumeroLicitacoesCard() {
                 </CardTitle>
                 <CheckCheck className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
-            {loaded && (
-                <CardContent className="space-y-1">
-                    <span className="text-2xl font-bold tracking-tight">
-                        8.574
-                    </span>
-                    <p className="text-xs text-muted-foreground">
-                        Dados cadastrados e atualizados
-                        <span className="text-blue-800 dark:text-emerald-400"> mensalmente</span>
-                    </p>
-                </CardContent>
-            )}
+            <CardContent className="flex flex-col  space-y-1">
+                {loading && (
+                    <div className="flex justify-center items-center h-40 text-2xl">
+                        <Loader2 className="animate-spin h-8 w-8 mr-2" />
+                    </div>
+                )}
+                {loaded && (
+                    <>
+                        <span className="text-2xl font-bold tracking-tight">
+                            {numeroLicitacoes !== null ? `${numeroLicitacoes.toLocaleString('pt-BR')}` : ''}
+                        </span>
+                        <p className="text-xs text-muted-foreground">
+                            Dados cadastrados e atualizados
+                            <span className="text-blue-800 dark:text-emerald-400"> mensalmente</span>
+                        </p>
+                    </>
+                )}
+            </CardContent>
         </Card>
     );
 }

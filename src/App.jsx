@@ -11,7 +11,7 @@ export function App() {
 
  <HelmetProvider>
   <ThemeProvider storageKey="licitando-theme" defaultTheme="dark">
-  <Helmet titleTemplate="%s | licitando"/>
+  <Helmet titleTemplate="%s | licitTracker"/>
 
 <RouterProvider router={router}/>
 

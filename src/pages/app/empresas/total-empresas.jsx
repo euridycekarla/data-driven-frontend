@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Card,CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import {LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer} from "recharts";
+import { api } from "@/lib/axios";
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const data = [
   { name: "2025", uv: 4000 },
@@ -10,9 +13,26 @@ const data = [
   { name: "2021", uv: 1890 }
 ];
 
-export default class TotalEmpresaCard extends PureComponent {
+export  default function TotalEmpresaCard (){
+  const [loading, setLoading] = useState(true);
+  const [totalEmpresa, setTotalEmpresa] = useState([]);
+  const total = totalEmpresa.map((tipo) => ({ name: tipo._id, uv: tipo.totalParticipantes }));
 
-  render() {
+  const getTotalEmpresa = async () => {
+    try {
+      const response = await api.get("/total-participantes");
+      setTotalEmpresa(response.data);
+    } catch (error) {
+      console.error("Erro ao obter itens licitacoes", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getTotalEmpresa();
+  }, []);
+
     return (
     <>
         <Card>
@@ -26,7 +46,7 @@ export default class TotalEmpresaCard extends PureComponent {
       <LineChart
         width={500}
         height={200}
-        data={data}
+        data={total}
         margin={{
           top: 10,
           right: 30,
@@ -53,4 +73,3 @@ export default class TotalEmpresaCard extends PureComponent {
     );
 
   }
-}

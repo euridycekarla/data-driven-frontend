@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NumeroLicitacoesCard } from './numero-licitacoes-card'
+import  NumeroLicitacoesCard  from './numero-licitacoes-card'
 import { ValorTotalCard } from './valor-total-card'
 import ModalidadeCompraCard from './modalidade-compra-card'
 import SituacaoLicitacaoCard from './situacao-licitacoes-card'
@@ -72,17 +72,20 @@ export function Dashboard(){
         </Select>
         <Button onClick={handleFilter}>Filtrar</Button>
       </form>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-3 gap-2">
             <div className="flex flex-col gap-8">
                 <NumeroLicitacoesCard />
                 <ValorTotalCard />
             </div>
             <ModalidadeCompraCard />
-            <SituacaoLicitacaoCard/>
             <OrgaoCard/>
         </div>
-        <div className="grid grid cols-9 gap-2">
+        <div className="flex flex-col gap-4">
+            <SituacaoLicitacaoCard/>
+        </div>
+        <div className="flex flex-col gap-4">
             <AnoLicitacaoChart/>
+
 
         </div>
     </div>

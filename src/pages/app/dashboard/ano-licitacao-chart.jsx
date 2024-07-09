@@ -1,15 +1,30 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent} from "@/components/ui/card"
 import { ResponsiveContainer,LineChart,XAxis,YAxis,CartesianGrid,Line,Tooltip, Legend} from "recharts"
-
-const data =[
-    {date:'2024', licitacoes :16000},
-    {date:'2023', licitacoes :8000},
-    {date:'2022', licitacoes :400590},
-    {date:'2021', licitacoes :2000},
-
-]
+import { api } from "@/lib/axios";
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export  default function AnoLicitacaoChart(){
+    const [loading, setLoading] = useState(true);
+    const [anoLicitacao, setAnoLicitacao] = useState([]);
+    const ano = anoLicitacao.map((tipo) => ({ date: tipo._id, licitacoes: tipo.count }));
+
+    const getAnoLicitacao = async () => {
+      try {
+        const response = await api.get("grafico4");
+        
+        setAnoLicitacao(response.data);
+      } catch (error) {
+        console.error("Erro ao obter itens licitacoes", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    useEffect(() => {
+      getAnoLicitacao();
+    }, []);
+
     return(
         <Card className="col-span-6" >
             <CardHeader className="flex-row items-center justify-between pb-8">
@@ -20,7 +35,7 @@ export  default function AnoLicitacaoChart(){
             </CardHeader>
             <CardContent>
             <ResponsiveContainer width="100%" height={240}>
-                <LineChart data={data} style={{ fontSize: 12 }}>
+                <LineChart data={ano} style={{ fontSize: 12 }}>
                     <XAxis dataKey="date" tickLine={false} axisLine={false} dy={16}/>
                     <YAxis stroke=" #888" axisLine={false} tickLine={false} />
                     <Tooltip/>
