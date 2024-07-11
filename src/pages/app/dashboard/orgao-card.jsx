@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { api } from "@/lib/axios";
 import { Loader2 } from "lucide-react";
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#6d8a39', '#d86b60', '#dbd799', '#3D8BF2', '#9c27b0', '#4caf50', '#000080', '#ff9800', '#ff5722', '#795548', '#607d8b', '#00bcd4', '#8bc34a', '#e91e63'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
@@ -41,17 +41,16 @@ const OrgaoCard = () => {
 
   return (
     <Card>
-      {loading ? (
-        <div className="flex justify-center items-center h-40 text-2xl">
-          <Loader2 className="animate-spin h-8 w-8 mr-2" />
-        </div>
-      ) : (
-        <>
           <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-base font-semibold">
               Top 3 órgãos em licitações
             </CardTitle>
           </CardHeader>
+          {loading ? (
+        <div className="flex justify-center items-center h-40 text-2xl">
+          <Loader2 className="animate-spin h-8 w-8 mr-2" />
+        </div>
+      ) : (
           <CardContent className="space-y-1">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -77,7 +76,6 @@ const OrgaoCard = () => {
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
-        </>
       )}
     </Card>
   );

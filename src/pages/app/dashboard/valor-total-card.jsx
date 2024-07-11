@@ -44,7 +44,7 @@ export function ValorTotalCard() {
                         </span>
                         <p className="text-xs text-muted-foreground">
                             Dados atualizados
-                            <span className="text-blue-800 dark:text-emerald-400"> mensalmente</span>
+                            <span className="text-blue-800 dark:text-emerald-400"> diariamente</span>
                         </p>
                     </>
                 )}
